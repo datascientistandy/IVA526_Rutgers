@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARIMA/SARIMA Trend Analysis</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .axis path,
+    .axis line {
+      shape-rendering: crispEdges;
+    }
+    .line {
+      fill: none;
+      stroke-width: 2;
+    }
+    .legend {
+      font-size: 12px;
+    }
+    .chart-container {
+      width: 90%;
+      margin: 0 auto;
+    }
+    .tooltip {
+      position: absolute;
+      text-align: center;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      border-radius: 5px;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="chart-container">
+    <h1>US-wide time series analysis of temperature trend and seasonality
+        <br>ARIMA/SARIMA Trend and Seasonality 1964 - 2013</h1>
+    <h2>Source: weather anomalies data on Kaggle.com</h2>
+    <div id="chart"></div>
+  </div>
+
+    <!-- Circle Pack Script -->
+    <script src="{{ url_for('static', filename='js/GlobalTrendSARIMA.js') }}"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+{
+    "name": "weathering",
+    "children": [
+      {
+        "name": "History",
+        "children": [
+          {
+            "name": "US 30 Deadliest Weather Disasters",
+            "size": 3500,
+            "footerText": "<strong>🌪️1. The Weather Can Be Deadly</strong><br> Heatmap of Top 30 Deadliest Weather Disasters in the United States<br> showing the distribution of adverse weather events by state and the associated deaths<br> This heatmap exposes the tragic human toll of extreme weather events, spotlighting the regions most frequently affected and the number of lives lost. <strong>The East Coast of the United States has suffered the most but specifically the South (the states of Louisiana, Mississippi, Florida) and New York</strong>. It’s a sobering reminder that weather isn’t just an inconvenience, it can be deadly. By examining historical patterns of hurricanes, floods, and heatwaves, users can appreciate the importance of risk-aware planning and stay vigilant in high-risk areas."
+          },
+          {
+            "name": "Occurence of Anomalies",
+            "size": 3500,
+            "footerText": "<strong>🌡️ 2. Climate Is Changing Fast</strong><br> Increase in Occurrence of Weather Anomalies in the United States<br> Line graph showing frequency of unusual weather events over time<br> Over the past century, the number of abnormal weather patterns—such as unexpected heat waves or cold spells—has dramatically increased. This graph underscores the shifting climate baseline and the growing unpredictability of daily weather, making long-term planning and adaptive responses increasingly vital."
+          },
+          {
+            "name": "Weather Anomalies by State",
+            "size": 3500,
+            "footerText": "<strong>🌡️ 2. Climate Is Changing Fast</strong><br> Weather Anomalies by State: Unexpected Very Hot and Very Cold Events<br> Bubble map comparing anomalies by region<br> Climate doesn’t change uniformly. Some states experience more frequent and extreme anomalies than others. This chart allows users to identify where unusual temperature events are most common, promoting local-level awareness and the tailoring of response strategies based on regional vulnerability."
+          },          
+          {
+            "name": "Global Trend SARIMA",
+            "size": 3534,
+            "footerText": "<strong>🌍 3. Temperatures Are Rising</strong><br> Global Trend: SARIMA Model<br>Time-series forecasting of global temperature trends<br> Using a SARIMA (Seasonal Auto-Regressive Integrated Moving Average) model, this graph captures the long-term warming trend worldwide. It provides a statistical foundation to understand the trajectory of climate change, emphasizing the role of data modeling in anticipating future scenarios."
+          },
+          {
+            "name": "SARIMA by Year",
+            "size": 3534,
+            "footerText": "<strong>🌍 3. Temperatures Are Rising</strong><br> SARIMA by Year: Yearly Temperature Projections<br>Annual breakdown of modeled temperature change<br>Zooming in, this visualization presents year-by-year forecasts, revealing not just a steady increase, but also short-term fluctuations. It helps users understand both macro and micro trends in temperature, allowing for seasonal preparation and long-term mitigation strategies."
+          }, 
+          {
+            "name": "Economic Impact Weather Disasters",
+            "size": 3500,
+            "footerText": "<strong>💸 4. The Cost of Weather: Economic Impact</strong><br> National Overview of Socio and Economic Damage<br>Aggregate losses from weather disasters over time<br>Severe weather doesn’t just affect lives—it impacts livelihoods. This chart quantifies the growing cost of natural disasters, showcasing the billions of dollars lost to storms, fires, floods, and droughts. The trend supports the argument for resilience planning as both a human and financial necessity."
+          }         
+      ]},
+      {
+      "name": "Forecast",
+      "children": [
+        {
+          "name": "Weather This Week",
+          "size": 1234,
+          "footerText": "<strong>📈 Forecasting the Future</strong><br> Weather and Climate Prediction Tools<br>Real-time and predictive models in action<br>Understanding what’s coming is critical. This section features tools and models that predict short- and long-term weather behavior using historical data, anomalies, and climate trends. Whether for agricultural planning, urban development, or personal safety, forecasting offers a proactive edge."          
+        },
+        {
+          "name": "Share Weather Experiences",
+          "size": 5678,
+          "footerText": "<strong>🤝 6. Share Weather Experiences</strong><br> Community Insights and Local Stories<br>A platform for real-life weather observations<br>Weather is personal. Through this feature, users can share their experiences—how a heatwave affected their garden or how unexpected snowfall disrupted travel. These stories create a dynamic knowledge exchange, grounding data in lived reality and highlighting the human side of climate variability."          
+        },
+        {
+          "name": "Weather Trivia",
+          "size": 5678,
+          "footerText": "<strong>🎯 7. Weather Trivia</strong><br> Learn While You Explore<br>Fun facts and quizzes about climate and weather history<br>Engage users with interactive trivia designed to educate and entertain. This feature offers bite-sized climate facts, record-setting weather events, and surprising science tidbits to deepen curiosity and encourage climate literacy."          
+        } 
+      ]},     
+      {
+        "name": "Analytics",
+        "children": [
+          {
+            "name": "US Climate Features",
+            "size": 1234,
+            "footerText": "<strong>📊 Parallel Coordinates</strong><br>select colorby each variable to see how it affects the weather<br> <em>→ No clear evidence of Global warming: a relationship that indicates temperatures are higher or lower in recent years</em><br> <em>→ Low temperatures, low humidity are associated with snow, high temperatures with fog, rain and thunder</em><br> <em>→ Not a clear relationship between precipitation and weather</em><br> <em>→ High elevation seems to be correlated with snow</em><br> <em>→ Challenge: did not have good data for all variables.</em>.<br> select Year-2025 and brush for Temperature greater than 70<br> <em>→ A possible correlation between temperatures and humidity, high temperatures = high humidity </em><br> <em>→ 2025 unexpected Winter and Spring high temperatures and humidity for Nebraska, California, Florida, Indiana, South Carolina</em><br> "
+          },
+          {
+            "name": "Clustering",
+            "size": 1234,
+            "footerText": "<strong>🧠 Clustering: Making Sense of Similar Weather Patterns</strong><br> Groupings of Similar Events and Regions<br>AI-driven categorization of weather data<br>Using clustering algorithms, this section identifies groups of states or time periods that share similar weather behaviors. It helps users see underlying patterns that traditional charts might miss, enabling smarter analysis and more informed predictions."            
+          },
+          {
+            "name": "Graph Hierarchies",
+            "size": 1234,
+            "footerText": "<strong>🕸️ Graph Hierarchies: Understanding Climate Interdependencies</strong><br> Relationships Among Climate Variables<br>How temperature, humidity, and event severity interact<br>Climate is a system of interconnected parts. This graph-based visualization illustrates how one variable can affect others—e.g., how rising temperatures might intensify rainfall or prolong drought. It’s a powerful tool for holistic thinking in environmental planning."            
+          },                    
+          {
+            "name": "Future Work",
+            "size": 5678,
+            "footerText": "<strong>For Future work we plan to make it a REACT single page app</strong><br> to achieve ultra vires, the ability to verbally interact with the application without having to click a button on each page to activate the audio dialogue.<br>Also we will make it responsive and also possibly turn it into a Mobile app .  An educational game based on geographical weather for school kids, is also planned .  Finally, we plan to Dockerize the whole application for ease of deployment. Also the graphics will be enhanced to look as good as any weather app outthere currently"            
+          }
+        ]}  
+  ]}
+  

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Enhanced Parallel Coordinates Chart</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: sans-serif;
+    }
+
+    .controls {
+      display: flex;
+      gap: 20px;
+      padding: 10px 20px;
+      align-items: center;
+      background: #f0f0f0;
+      position: absolute;
+      top: 50px;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+    }
+
+    select {
+      padding: 4px;
+      font-size: 14px;
+    }
+
+    svg {
+      position: absolute;
+      top: 180px;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 180px);
+    }
+
+    .axis path, .axis line {
+      fill: none;
+      stroke: #000;
+    }
+
+    .line {
+      fill: none;
+      stroke-width: 2px;
+      opacity: 0.7;
+    }
+
+    .tooltip {
+      position: absolute;
+      padding: 5px;
+      background: lightgray;
+      border: 1px solid black;
+      border-radius: 5px;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    #heat-index-container {
+      position: absolute;
+      top: 110px;
+      left: 20px;
+      width: 320px;
+      height: 50px;
+    }
+
+    #heat-index {
+      width: 300px;
+      height: 20px;
+      border: 1px solid #000;
+      display: block;
+    }
+
+    .heat-label {
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+
+    .heat-scale {
+      display: flex;
+      justify-content: space-between;
+      width: 300px;
+      font-size: 10px;
+    }
+
+    .brush .selection {
+      fill: #777;
+      fill-opacity: 0.3;
+    }
+  </style>
+</head>
+<body>
+  <audio id="audio-player" autoplay muted>
+    <source src="{{url_for('serve_audio', filename='analytics_audio')}}" type="audio/mp3"> browser does not support the audio tag 
+  </audio>
+  <script>
+    document.addEventListener("click", function() {
+      const audio = document.getElementById("audio-player");
+      audio.muted = false;
+      audio.play();
+    }, {once: true});
+  </script>
+
+  <header>
+    <h3>An interactive visual examination of relationships and patterns between key weather drivers and features in the United States (1950–2025). Source: ncei.noaa.gov</h3>
+  </header>
+
+  <div class="controls">
+    <label>State:
+      <select id="state-select">
+        <option value="">All</option>
+      </select>
+    </label>
+    <label>Year:
+      <select id="year-select">
+        <option value="">All</option>
+      </select>
+    </label>
+    <label>Color by:
+      <select id="color-select">
+        <option value="STATE">State</option>
+        <option value="YEAR">Year</option>
+        <option value="TEMP" selected>Temp</option>
+        <option value="DEWP">Dew Point</option>
+        <option value="PRCP">Precip</option>
+        <option value="MXSPD">Wind</option>
+        <option value="ELEVATION">Elevation</option>
+        <option value="FRSHTT_DETAIL">Weather</option>
+      </select>
+    </label>
+  </div>
+
+  <div id="heat-index-container">
+    <div class="heat-label">Temperature Heat Index</div>
+    <canvas id="heat-index"></canvas>
+    <div class="heat-scale"><span>Low</span><span>High</span></div>
+  </div>
+
+  <svg></svg>
+  <div class="tooltip"></div>
+  
+<script src="{{ url_for('static', filename='js/USClimateFeatures.js') }}"></script>
+
+
+</body>
+</html>

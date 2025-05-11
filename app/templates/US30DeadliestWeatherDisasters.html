@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Deadliest US Weather Events</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px 10px 0;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    h4 {
+      margin-top: 5px;
+      font-weight: normal;
+    }
+
+    #container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    #map {
+      flex: 2;
+      position: relative;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    #tooltip {
+      position: absolute;
+      background-color: rgba(0,0,0,0.75);
+      color: #fff;
+      padding: 6px 10px;
+      font-size: 13px;
+      border-radius: 4px;
+      pointer-events: none;
+      display: none;
+      z-index: 10;
+    }
+
+    #state-summary {
+      flex: 1;
+      max-width: 400px;
+      padding: 20px;
+      background-color: #ffffff;
+      border-left: 1px solid #ccc;
+      font-size: 16px;
+      font-weight: bold;
+      overflow-y: auto;
+    }
+
+    #state-summary table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    #state-summary th,
+    #state-summary td {
+      padding: 8px 10px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    #state-summary th {
+      background-color: #0077cc;
+      color: white;
+    }
+
+    a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      #container {
+        flex-direction: column;
+      }
+      #map, #state-summary {
+        width: 100%;
+        height: 50vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>Top 30 Deadliest U.S Weather Events, 1969 - 2018</h2>
+  <h4>Source: <a href="https://www.wunderground.com/cat6/Top-30-Deadliest-US-Weather-Events-Past-50-Years" target="_blank">Weather Underground</a></h4>
+</header>
+
+<div id="container">
+  <div id="map">
+    <div id="tooltip"></div>
+  </div>
+  <div id="state-summary">Click a state to see event breakdown.</div>
+</div>
+
+    <!-- Circle Pack Script -->
+    <script src="{{ url_for('static', filename='js/US30DeadliestWeatherDisasters.js') }}"></script>
+
+
+
+</body>
+</html>

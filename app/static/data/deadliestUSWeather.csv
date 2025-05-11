@@ -1,0 +1,31 @@
+Event_type,Event,Year,Deaths,State
+Hurricane,Hurricane Maria,2017,2981,"PR, VI"
+Hurricane,Hurricane Katrina,2005,1389,"SE, LA, MS"
+Heat Wave,Heat Wave,1995,670,"IL, MO, OK, WI, IA, NY, DC"
+Hurricane,Hurricane Camille,1969,343,"MS, LA"
+Blizzard,Blizzard/Severe,1993,270,Eastern US
+Flood,Flood,1972,238,"Rapid City, SD"
+Tornado,Tornado outbreak,2011,321,SE US
+Tornado,Tornado outbreak,1974,319,Central US
+Heat Wave,Heat Wave,1983,188,US
+Blizzard,Blizzard/Flood,1996,187,US
+Tornado,Tornado outbreak,2011,177,"Joplin, MO"
+Heat Wave,Heat Wave,2006,164,CA
+Heat Wave,Heat wave,2012,123,"DC, VA, NC, IA"
+Hurricane,Hurricane Sandy,2012,155,Eastern US
+Winter,Winter weather,1983,151,Eastern US
+Winter,Winter weather,1985,150,Eastern US
+Flood,Flood,1976,145,"Big Thompson River, CO"
+Hurricane,Hurricane Agnes,1972,139,NE US
+Tornado,Tornado outbreak,1998,132,US
+Flood,Flood,1972,125,"Buffalo Creek, WV"
+Tornado,Tornado outbreak,1971,123,US
+Hurricane,Hurricane Andrew,1992,113,"FL, LA"
+Hurricane,Hurricane Rita,2005,108,"LA, TX"
+Blizzard,1978,100,Eastern US
+Winter,Winter weather,1989,100,Eastern US
+Hurricane,Hurricane Irma,2017,97,"FL, VI"
+Hurricane,Hurricane Harvey,2017,89,"TX, LA"
+Wildfire,Wildfire,2018,86,"Cample FIre, CA"
+Winter,Winter weather,1982,85,Eastern US
+Flood,Flood,1977,84,"Johnstown, PA"

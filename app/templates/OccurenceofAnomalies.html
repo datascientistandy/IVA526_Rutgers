@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Temperature Anomalies Time Series Plot</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .line {
+            fill: none;
+            stroke-width: 2;
+        }
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 4px;
+            pointer-events: none;
+            opacity: 0;
+        }
+        .axis-label {
+            font-size: 12px;
+        }
+        .legend {
+            font-size: 12px;
+        }
+        .checkbox-group {
+            margin: 10px;
+        }
+        .checkbox-group label {
+            margin-right: 10px;
+        }
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            text-anchor: middle;
+        }
+        .source {
+            font-size: 12px;
+            text-anchor: middle;
+            fill: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="checkbox-group">
+        <label><input type="checkbox" id="showWinter" checked> Winter</label>
+        <label><input type="checkbox" id="showSpring" checked> Spring</label>
+        <label><input type="checkbox" id="showSummer" checked> Summer</label>
+        <label><input type="checkbox" id="showFall" checked> Fall</label>
+        <label><input type="checkbox" id="showAll" checked> Show All Seasons</label>
+    </div>
+    <div id="chart"></div>
+    <div class="tooltip"></div>
+
+    <!-- Circle Pack Script -->
+    <script src="{{ url_for('static', filename='js/OccurenceofAnomalies.js') }}"></script>
+
+
+</body>
+</html>

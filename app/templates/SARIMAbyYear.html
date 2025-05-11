@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARIMA/SARIMA Trend and Seasonality</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .axis path,
+        .axis line {
+            shape-rendering: crispEdges;
+        }
+        .line {
+            fill: none;
+            stroke-width: 2;
+        }
+        .legend {
+            font-size: 12px;
+        }
+        .legend rect {
+            width: 20px;
+            height: 20px;
+        }
+        .chart-container {
+            width: 90%;
+            margin: 0 auto;
+        }
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 5px;
+            pointer-events: none;
+        }
+        select {
+            margin: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chart-container">
+        <h1>ARIMA/SARIMA Trend and Seasonality</h1>
+
+        <!-- Dropdown for selecting year -->
+        <label for="yearSelect">Select Year:</label>
+        <select id="yearSelect">
+            <!-- Options will be populated dynamically -->
+        </select>
+
+        <div id="chart"></div>
+    </div>
+
+    <!-- Circle Pack Script -->
+    <script src="{{ url_for('static', filename='js/SARIMAbyYear.js') }}"></script>
+
+
+</body>
+</html>

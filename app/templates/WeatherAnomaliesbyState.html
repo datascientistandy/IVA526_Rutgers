@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather Anomalies Map</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/topojson@3"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    .tooltip {
+      position: absolute;
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      pointer-events: none;
+      visibility: hidden;
+      z-index: 10;
+    }
+    #controls {
+      margin: 20px;
+      text-align: center;
+    }
+    #slider {
+      width: 300px;
+    }
+    svg {
+      background-color: #e8f4fc;
+      border: 1px solid #ccc;
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+
+<h2 style="text-align:center">US Weather Anomalies Over Time</h2>
+
+<div id="controls">
+  <label for="slider">Year: </label>
+  <input type="range" id="slider" min="1977" max="2020" value="1977">
+  <span id="year-label">1977</span>
+</div>
+
+<div id="tooltip" class="tooltip"></div>
+<svg width="960" height="600"></svg>
+
+<script src="{{ url_for('static', filename='js/WeatherAnomaliesbyState.js') }}"></script>
+</body>
+</html>

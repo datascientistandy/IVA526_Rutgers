@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Weathering Change</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: Arial, sans-serif;
+      background-image: url("{{ url_for('static', filename='img/background-home.jpg') }}");
+      background-size: cover;
+      background-position: center;
+      background-color: rgba(255, 255, 255, 0.6);
+      background-blend-mode: darken;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .page-header {
+      background: rgba(255, 255, 255, 0.8); /* Light background */
+      padding: 20px 0;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .title h1 {
+      font-size: 36px;
+      font-weight: bold;
+      color: #003366;  /* Dark Blue for title */
+    }
+
+    /* Navigation menu */
+    .nav-menu {
+      color: #003366;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      gap: 30px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .nav-menu a {
+      color: #003366;
+      text-decoration: none;
+      padding: 5px 10px;
+    }
+
+    .nav-menu a:hover {
+      background-color: rgba(0, 51, 102, 0.2);
+      border-radius: 5px;
+    }
+
+
+    .content {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      height: 70%;
+    }
+
+    .sidebar {
+      width: 30%;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px;
+    }
+
+    .main-content {
+      width: 70%;
+      padding: 20px;
+      overflow-y: auto;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .svg-container {
+      width: 100%;
+      height: 100%;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .history-content {
+      font-size: 18px; /* Increase text size */
+      padding-left: 40px; /* Two indents (~20px per indent) */
+      padding-right: 20px;
+      margin-top: 20px;
+      color: #003366;
+    }
+
+    .history-content h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .history-content h3 {
+      font-size: 20px;
+      font-weight: normal;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .history-list {
+      list-style-type: disc;
+      padding-left: 40px;
+      line-height: 1.8;
+    }
+
+    .history-list em {
+      color: #555;
+      font-style: italic;
+    }
+
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      min-height: 500px;
+    }
+
+    footer {
+      background: rgba(255, 255, 255, 0.95);
+      color: #003366;
+      text-align: left;
+      font-size: 18px;
+      padding: 20px 10px;
+      height: 20%;
+    }
+
+    footer-text {
+      background: rgba(255, 255, 255, 0.95);
+      color: #003366;
+      text-align: left;
+      font-size: 18px;
+      padding: 20px 10px;
+      height: 20%;
+    }
+
+    img {height: 30px;}
+
+  </style>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <audio id="audio-player" autoplay muted>
+    <source src="{{url_for('serve_audio', filename='history_audio')}}" type="audio/mp3"> browser does not suppor the audio tag 
+</audio>
+<script>
+    document.addEventListener("click", function(){
+        var audio = document.getElementById("audio-player")
+        audio.muted = false // unmute after page loads
+
+        audio.play() //.catch(error => console.log("Autoplay prevented: ", error))
+    }, {once: true})
+</script>
+    <header class="page-header">
+      <div class="title"><h1>Weathering Change</h1></div>
+      <nav class="nav-menu">
+        
+        <a href="{{url_for('index')}}">Home</a>
+        <a href="#">History</a>
+        <a href="{{url_for('forecast')}}">Forecast</a>
+        <a href="{{url_for('analytics')}}">Analytics</a>
+      </nav>
+    </header>
+
+  <div class="content">
+    <div class="sidebar">
+      <div class="svg-container">
+        <svg></svg>
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="history-content">
+          <h1>History</h1><br>
+          <h3>
+            The app explores historical and recent weather events with interactive maps and charts.
+            We also analyze long-term climate changes through visualizations and projections.
+          </h3><br>
+          <div>
+          <ul class="history-list">
+            <li><strong>🌪️ 1. The Weather Can Be Deadly</strong><br>
+              Top 30 Deadliest Weather Disasters in the United States<br>
+              <em>→ Heatmap showing distribution of adverse weather events by state and associated deaths</em>
+            </li><br>
+        
+            <li><strong>🌡️ 2. Climate Is Changing Fast</strong><br>
+              <strong>2.1.</strong> Increase in Occurrence of Weather Anomalies in the United States<br>
+              <em>→ Line graph showing frequency of unusual weather events over time</em><br>
+              <strong>2.2.</strong> Weather Anomalies by State: Unexpected Very Hot and Very Cold Events<br>
+              <em>→ Bar chart or heatmap comparing anomalies by region</em>
+            </li><br>
+        
+            <li><strong>🌍 3. Temperatures Are Rising</strong><br>
+              <strong>3.1.</strong> Global Trend: SARIMA Model<br>
+              <em>→ Time-series forecasting of global temperature trends</em><br>
+              <strong>3.2.</strong> SARIMA by Year: Yearly Temperature Projections<br>
+              <em>→ Annual breakdown of modeled temperature change</em>
+            </li><br>
+        
+            <li><strong>💸 4. The Cost of Weather: Economic Impact</strong><br>
+              <strong>4.1.</strong> National Overview of Economic Damage<br>
+              <em>→ Aggregate losses from weather disasters over time</em><br>
+              <strong>4.2.</strong> State-by-State and Sectoral Breakdown<br>
+              <em>→ Which regions and industries suffer most?</em>
+            </li>
+          </ul>
+        </div>
+        </div>
+    </div>
+  </div>
+
+  <footer>
+    <p id="footer-text">
+      Data Interaction and Visual Analytics - CS 526 Spring 2025<br>
+      Instructor: James Abello • Assistants: Haoyang Zhang, Harshini Bonam (sdb202)
+    </p>
+  </footer>
+
+    <!-- Circle Pack Script -->
+    <script src="{{ url_for('static', filename='js/circlePack_history.js') }}"></script>
+
+</body>
+</html>

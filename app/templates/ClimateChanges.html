@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Anomalies - Histogram with Brush</title>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson@3.0.2/dist/topojson.min.js"></script>
+  <script src="https://unpkg.com/topojson-client@3"></script>
+
+  <style>
+    body { 
+      font-family: sans-serif; 
+      width: 1350px;
+      height: 100%;
+    }
+
+    #tooltip {
+      position: absolute;
+      display: none;
+      background: rgba(0, 0, 0, 0.75);
+      color: white;
+      padding: 5px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      pointer-events: none;
+    }
+    svg {
+      border: 1px solid #ccc;
+    }
+
+    #title {
+      text-align: center;
+      font-size: 24px;
+      margin: 10px;
+      padding: 10px;
+      background-color: #f4f4f4;
+    }
+
+    #tooltip {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      pointer-events: none;
+      display: none;
+    }
+
+    #chart-container {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      width: 100%;
+      height: 700px;
+      margin-top: 20px;
+    }
+
+    #map-container {
+      width: 70%;
+      height: 700px;
+    }
+
+    #table-container {
+      width: 28%;
+      margin-left: 10px;
+      height: 700px;
+      overflow-y: auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 14px;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+    }
+
+    th, td {
+      padding: 5px 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    #histogram-container {
+      height: 100px;
+      width: 100%;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      margin-left: 20px;
+    }
+
+    .bar {
+      fill: steelblue;
+      opacity: 0.7;
+      cursor: pointer;
+    }
+
+    .brush-selection {
+      fill: rgba(0, 123, 255, 0.3);
+    }
+
+    .dropdown-container {
+      margin: 10px;
+    }
+
+    .brush {
+            cursor: pointer;
+        }
+  </style>
+</head>
+<body>
+  <audio id="audio-player" autoplay muted>
+    <source src="{{url_for('serve_audio', filename='ClimateChanges_audio')}}" type="audio/mp3"> browser does not suppor the audio tag 
+</audio>
+<script>
+    document.addEventListener("click", function(){
+        var audio = document.getElementById("audio-player")
+        audio.muted = false // unmute after page loads
+
+        audio.play() //.catch(error => console.log("Autoplay prevented: ", error))
+    }, {once: true})
+</script>
+  <div id="title">Weather Anomalies in the United States (1961 - 2013)</div>
+  <div id="tooltip"></div>
+
+  <div id="chart-container">
+    <div id="map-container">
+      <svg id="map" width="960" height="700"></svg>
+    </div>
+
+    <div id="table-container">
+      <div class="dropdown-container">
+        <label for="location-dropdown">Select Location: </label>
+        <select id="location-dropdown">
+          <option value="">Select a Location</option>
+        </select>
+      </div>
+    
+    <div>
+      <table>
+        <tr><th>Year</th><td id="year-range">1961 - 2013</td></tr>
+        <tr><th>Extreme Heat</th><td id="extreme-heat-count">0</td></tr>
+        <tr><th>Extreme Cold</th><td id="extreme-cold-count">0</td></tr>
+      </table>
+      <table id="state-events-table">
+        <thead>
+          <tr>
+            <th>State</th>
+            <th>Extreme Heat Events</th>
+            <th>Extreme Cold Events</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Rows will be appended here by D3 -->
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+
+  <div id="histogram-container">
+    <svg id="histogram"></svg>
+  </div>
+
+    <!-- Circle Pack Script -->
+    <script src="{{ url_for('static', filename='js/ClimateChanges.js') }}"></script>
+
+
+
+</body>
+</html>

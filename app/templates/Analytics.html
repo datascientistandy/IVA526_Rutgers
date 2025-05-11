@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Weathering Change</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: Arial, sans-serif;
+      background-image: url("{{ url_for('static', filename='img/background-home.jpg') }}");
+      background-size: cover;
+      background-position: center;
+      background-color: rgba(255, 255, 255, 0.6);
+      background-blend-mode: darken;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .page-header {
+      background: rgba(255, 255, 255, 0.8); /* Light background */
+      padding: 20px 0;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .title h1 {
+      font-size: 36px;
+      font-weight: bold;
+      color: #003366;  /* Dark Blue for title */
+    }
+
+    /* Navigation menu */
+    .nav-menu {
+      color: #003366;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      gap: 30px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .nav-menu a {
+      color: #003366;
+      text-decoration: none;
+      padding: 5px 10px;
+    }
+
+    .nav-menu a:hover {
+      background-color: rgba(0, 51, 102, 0.2);
+      border-radius: 5px;
+    }
+
+
+    .content {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      height: 70%;
+    }
+
+    .sidebar {
+      width: 30%;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px;
+    }
+
+    .main-content {
+      width: 70%;
+      padding: 20px;
+      overflow-y: auto;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .svg-container {
+      width: 100%;
+      height: 100%;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .analytics-content {
+      font-size: 18px; /* Increase text size */
+      padding-left: 40px; /* Two indents (~20px per indent) */
+      padding-right: 20px;
+      margin-top: 20px;
+      color: #003366;
+    }
+
+    .analytics-content h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .analytics-content h3 {
+      font-size: 20px;
+      font-weight: normal;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .analytics-list {
+      list-style-type: disc;
+      padding-left: 40px;
+      line-height: 1.8;
+    }
+
+    .analytics-list em {
+      color: #555;
+      font-style: italic;
+    }
+
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      min-height: 500px;
+    }
+
+    footer {
+      background: rgba(255, 255, 255, 0.95);
+      color: #003366;
+      text-align: left;
+      font-size: 18px;
+      padding: 20px 10px;
+      height: 20%;
+    }
+
+    footer-text {
+      background: rgba(255, 255, 255, 0.95);
+      color: #003366;
+      text-align: left;
+      font-size: 18px;
+      padding: 20px 10px;
+      height: 20%;
+    }
+
+    img {height: 30px;}
+
+  </style>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <audio id="audio-player" autoplay muted>
+    <source src="{{url_for('serve_audio', filename='analytics_audio')}}" type="audio/mp3"> browser does not suppor the audio tag 
+</audio>
+<script>
+    document.addEventListener("click", function(){
+        var audio = document.getElementById("audio-player")
+        audio.muted = false // unmute after page loads
+
+        audio.play() //.catch(error => console.log("Autoplay prevented: ", error))
+    }, {once: true})
+</script>  
+    <header class="page-header">
+      <div class="title"><h1>Weathering Change</h1></div>
+      <nav class="nav-menu">
+        <a href="{{url_for('index')}}">Home</a>
+        <a href="{{url_for('history')}}">History</a>
+        <a href="{{ url_for('forecast') }}">Forecast</a>
+        <a href=#>Analytics</a>
+      </nav>
+    </header>
+
+  <div class="content">
+    <div class="sidebar">
+      <div class="svg-container">
+        <svg></svg>
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="analytics-content">
+          <h1>Analytics</h1><br>
+          <h3>
+            The app provides a Data Exploration, a Dive deep into advanced data visualizations and analyses
+          </h3><br>
+          <div>
+          <ul class="analytics-list">
+            <li><strong>🌪️ 1. Clustering: Making Sense of Similar Weather Patterns</strong><br>
+              Groupings of Similar Events and Regions<br>
+              <em>→ AI-driven categorization of weather data</em>
+            </li><br>
+        
+            <li><strong>🌡️ 2. Graph Hierarchies: Understanding Climate Interdependencies</strong><br>
+              Relationships Among Climate Variables<br>
+              <em>→ How temperature, humidity, and event severity interact</em><br>
+            </li><br>
+        
+            <li><strong>💸 3. This App is meant for researchers and analysts to see how multiple variables interact</strong>
+              Parallel Coordinates Comparing Multiple Weather Factors Simultaneously <br>
+              <em>→ Advanced multivariate analysis visualization</em>
+            </li><br>
+                   
+            <li><strong>🌍 4. This App in Future Work will cater for all users including those with disabilities by integrating verbal Interaction</strong><br>
+              For Future work we plan to make it a REACT single page app<br>
+              <em>→ to achieve Inter alia, the ability to verbally interact with the application without having to click a button on each page to activate the audio dialogue.</em><br>
+            </li>
+
+          </ul>
+        </div>
+        </div>
+    </div>
+  </div>
+
+  <footer>
+    <p id="footer-text">
+      Data Interaction and Visual Analytics - CS 526 Spring 2025<br>
+      Instructor: James Abello • Assistants: Haoyang Zhang, Harshini Bonam (sdb202)
+    </p>
+  </footer>
+
+
+    <!-- Circle Pack Script -->
+    <script src="{{ url_for('static', filename='js/circlePack_analytics.js') }}"></script>
+
+</body>
+</html>

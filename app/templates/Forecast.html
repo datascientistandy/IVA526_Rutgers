@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Weathering Change</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: Arial, sans-serif;
+      background-image: url("{{ url_for('static', filename='img/background-home.jpg') }}");
+      background-size: cover;
+      background-position: center;
+      background-color: rgba(255, 255, 255, 0.6);
+      background-blend-mode: darken;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .page-header {
+      background: rgba(255, 255, 255, 0.8); /* Light background */
+      padding: 20px 0;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .title h1 {
+      font-size: 36px;
+      font-weight: bold;
+      color: #003366;  /* Dark Blue for title */
+    }
+
+    /* Navigation menu */
+    .nav-menu {
+      color: #003366;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      gap: 30px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .nav-menu a {
+      color: #003366;
+      text-decoration: none;
+      padding: 5px 10px;
+    }
+
+    .nav-menu a:hover {
+      background-color: rgba(0, 51, 102, 0.2);
+      border-radius: 5px;
+    }
+
+
+    .content {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      height: 70%;
+    }
+
+    .sidebar {
+      width: 30%;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px;
+    }
+
+    .main-content {
+      width: 70%;
+      padding: 20px;
+      overflow-y: auto;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .svg-container {
+      width: 100%;
+      height: 100%;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .forecast-content {
+      font-size: 18px; /* Increase text size */
+      padding-left: 40px; /* Two indents (~20px per indent) */
+      padding-right: 20px;
+      margin-top: 20px;
+      color: #003366;
+    }
+
+    .forecast-content h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .forecast-content h3 {
+      font-size: 20px;
+      font-weight: normal;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .forecast-list {
+      list-style-type: disc;
+      padding-left: 40px;
+      line-height: 1.8;
+    }
+
+    .forecast-list em {
+      color: #555;
+      font-style: italic;
+    }
+
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      min-height: 500px;
+    }
+
+    footer {
+      background: rgba(255, 255, 255, 0.95);
+      color: #003366;
+      text-align: left;
+      font-size: 18px;
+      padding: 20px 10px;
+      height: 20%;
+    }
+
+    footer-text {
+      background: rgba(255, 255, 255, 0.95);
+      color: #003366;
+      text-align: left;
+      font-size: 18px;
+      padding: 20px 10px;
+      height: 20%;
+    }
+
+    img {height: 30px;}
+
+  </style>
+  <link 
+  rel="stylesheet" 
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  >
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <audio id="audio-player" autoplay muted>
+    <source src="{{url_for('serve_audio', filename='forecast_audio')}}" type="audio/mp3"> browser does not suppor the audio tag 
+</audio>
+<script>
+    document.addEventListener("click", function(){
+        var audio = document.getElementById("audio-player")
+        audio.muted = false // unmute after page loads
+
+        audio.play() //.catch(error => console.log("Autoplay prevented: ", error))
+    }, {once: true})
+</script>  
+    <header class="page-header">
+      <div class="title"><h1>Weathering Change</h1></div>
+      <nav class="nav-menu">
+        <a href="{{url_for('index')}}">Home</a>
+        <a href="{{url_for('history')}}">History</a>
+        <a href=#>Forecast</a>
+        <a href="{{ url_for('analytics') }}">Analytics</a>
+      </nav>
+    </header>
+
+  <div class="content">
+    <div class="sidebar">
+      <div class="svg-container">
+        <svg></svg>
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="forecast-content">
+          <h1>Forecast</h1><br>
+          <h3>
+            The app provides Forecasting Tools that simulate future weather scenarios and plan for various climate outcomes.
+            It also seeks to provide community Insights where we encourage sharing personal experiences and engagement with trivia to foster learning.
+          </h3><br>
+          <body class="bg-light">
+            <div class="container mt-5">
+                <h2 class="mb-4 text-center">7-Day Weather Forecast</h2>
+            
+                <form method="POST" class="mb-4">
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            name="location" 
+                            placeholder="Enter ZIP code or city (e.g., 12205 or Albany)" 
+                            class="form-control" 
+                            value="{{ location or '12205' }}"
+                            required
+                            style="width: 30%;"
+                        >
+                        <button type="submit" class="btn btn-primary">Get Forecast</button>
+                    </div>
+                </form>
+            
+                {% if forecast_table %}
+                    <div class="card p-3 shadow-sm">
+                        <h5 class="card-title">Forecast for {{ location }}</h5>
+                        <div class="table-responsive">
+                            {{ forecast_table | safe }}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+          <div>
+          <ul class="forecast-list">
+            <li><strong>📈 1. Forecasting the Future</strong><br>
+              Weather and Climate Prediction Tools<br>
+              <em>→ Real-time and predictive models in action</em>
+            </li><br>
+        
+            <li><strong>🤝 2. Share Weather Experiences</strong><br>
+              Community Insights and Local Stories<br>
+              <em>→ A platform for real-life weather observations</em><br>
+            </li><br>
+        
+            <li><strong>🎯 3. Weather Trivia</strong><br>
+              Learn While You Explore<br>
+              <em>→ Fun facts and quizzes about climate and weather history</em><br>
+            </li>
+          </ul>
+        </div>
+        </div>
+    </div>
+  </div>
+
+  <footer>
+    <p id="footer-text">
+      Data Interaction and Visual Analytics - CS 526 Spring 2025<br>
+      Instructor: James Abello • Assistants: Haoyang Zhang, Harshini Bonam (sdb202)
+    </p>
+  </footer>
+
+    <!-- Circle Pack Script -->
+    <script src="{{ url_for('static', filename='js/circlePack_forecast.js') }}"></script>
+
+</body>
+</html>
